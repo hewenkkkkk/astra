@@ -32,17 +32,17 @@ const totalPosts = page.total;
       <div class="aurora-mouse" data-posts-mouse></div>
       <div class="relative z-10">
         <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
-          <span class="glow-text">Posts</span>
+          <span class="glow-text">文章</span>
         </h1>
         <p class="mt-3 max-w-lg text-foreground/70 italic">
-          Todos los artículos que he publicado.
+          这里记录了我的全部文章
         </p>
         <div class="mt-4 flex flex-wrap items-center gap-2">
-          <span class="hero-badge">{totalPosts} posts</span>
+          <span class="hero-badge">数量：{totalPosts}</span>
           {
             page.lastPage > 1 && (
               <span class="hero-badge">
-                Página {page.currentPage}/{page.lastPage}
+                 第{page.currentPage}页/共{page.lastPage}页
               </span>
             )
           }
@@ -88,7 +88,7 @@ const totalPosts = page.total;
           </ul>
         )
       }
-      
+
       <div data-pagination-wrapper>
         <Pagination {page} />
       </div>
@@ -100,7 +100,7 @@ const totalPosts = page.total;
 
 <script>
   let cleanupController: AbortController | null = null;
-  
+
   function initPostsPage() {
     if (cleanupController) cleanupController.abort();
     cleanupController = new AbortController();
@@ -131,11 +131,11 @@ const totalPosts = page.total;
     onIdle(async () => {
       // @ts-expect-error
       const { PagefindUI } = await import("@pagefind/default-ui");
-      
+
       if (import.meta.env.DEV) {
         container.innerHTML = `
           <div class="bg-muted/75 rounded p-4 text-sm mb-4 border border-border">
-            <p><strong>Dev Mode:</strong> La búsqueda intentará usar el índice construido más reciente. Si no ves resultados, ejecuta <code>pnpm run build</code> primero.</p>
+            <p><strong>Dev Mode:</strong> 搜索会尝试使用最近构建的索引。如果你没有看到结果，请先执行 <code>pnpm run build</code></p>
           </div>
         `;
         // Removed the early return to allow pagefind to attempt loading the local index
@@ -150,7 +150,7 @@ const totalPosts = page.total;
       // Toggle default posts grid visibility when typing
       const input = container.querySelector(".pagefind-ui__search-input") as HTMLInputElement;
       const defaultContainer = document.querySelector("[data-default-posts-container]") as HTMLElement;
-      
+
       if (input && defaultContainer) {
         const toggleVisibility = () => {
           const hasValue = input.value.trim().length > 0;
@@ -162,7 +162,7 @@ const totalPosts = page.total;
         };
 
         input.addEventListener("input", toggleVisibility, { signal });
-        
+
         // Handle clear button
         const clearBtn = container.querySelector(".pagefind-ui__search-clear");
         if (clearBtn) {
@@ -184,7 +184,7 @@ const totalPosts = page.total;
           }
         }
       };
-      
+
       // Use capture mode to intercept before the global modal listener
       document.addEventListener("keydown", handleCmdK, { signal, capture: true });
 
@@ -367,7 +367,7 @@ const totalPosts = page.total;
     background: color-mix(in srgb, var(--accent) 8%, transparent);
     color: var(--accent);
     margin-bottom: 1.5rem;
-    box-shadow: 
+    box-shadow:
       0 0 0 1px color-mix(in srgb, var(--accent) 15%, transparent),
       0 10px 30px -10px color-mix(in srgb, var(--accent) 25%, transparent);
     animation: empty-float 4s ease-in-out infinite alternate;

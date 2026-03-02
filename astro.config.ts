@@ -81,7 +81,14 @@ export default defineConfig({
         name: "Sriracha",
         cssVariable: "--font-sriracha",
         fallbacks: ["cursive"],
-        provider: fontProviders.google(),
+        provider: fontProviders.local(),
+        options: {
+          variants: [
+            {
+              src: ["./src/assets/fonts/sriracha-v16-latin-regular.woff2"],
+            },
+          ],
+        }
       },
       {
         name: "Cartograph CF",

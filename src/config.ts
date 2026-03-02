@@ -1,9 +1,9 @@
 export const SITE = {
   website: "https://devosfera.vercel.app/",
-  author: "Andrés Ujpán",
+  author: "芯 笑",
   profile: "https://github.com/0xdres",
-  desc: "Un blog para compartir mis pensamientos y proyectos mientras aprendo cosas nuevas.",
-  title: "Devosfera",
+  desc: "追求生活和学习的平衡",
+  title: "Welcome",
   ogImage: "devosfera-og.webp", // ubicado en la carpeta public
   lightAndDarkMode: true,
   postPerIndex: 6,
@@ -18,9 +18,10 @@ export const SITE = {
     url: "https://github.com/0xdres/astro-devosfera/edit/main/",
   },
   dynamicOgImage: true,
+  authorImage: "src/assets/images/author.webp",
   dir: "ltr", // "rtl" | "auto"
-  lang: "es", // html lang code. Set this empty and default will be "en"
-  timezone: "America/Guatemala", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  lang: "en", // html lang code. Set this empty and default will be "en"
+  timezone: "Asia/Shanghai", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   introAudio: {
     enabled: true, // mostrar/ocultar el reproductor en el hero
     src: "/audio/intro-web.mp3", // ruta al archivo (relativa a /public)
