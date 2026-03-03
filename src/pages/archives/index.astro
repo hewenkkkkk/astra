@@ -16,18 +16,18 @@ if (!SITE.showArchives) {
 const posts = await getCollection("blog", ({ data }) => !data.draft);
 
 const months = [
-  "Enero",
-  "Febrero",
-  "Marzo",
-  "Abril",
-  "Mayo",
-  "Junio",
-  "Julio",
-  "Agosto",
-  "Septiembre",
-  "Octubre",
-  "Noviembre",
-  "Diciembre",
+  "一月",
+  "二月",
+  "三月",
+  "四月",
+  "五月",
+  "六月",
+  "七月",
+  "八月",
+  "九月",
+  "十月",
+  "十一月",
+  "十二月",
 ];
 
 const totalPosts = posts.length;
@@ -49,16 +49,15 @@ const yearGroups = Object.entries(
       <div class="aurora-mouse" data-archive-mouse></div>
       <div class="relative z-10">
         <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
-          <span class="glow-text">Archivo</span>
+          <span class="glow-text">存档</span>
         </h1>
         <p class="mt-3 max-w-lg text-foreground/70 italic">
-          Un viaje por todo lo que he publicado, organizado en el tiempo.
+          沿着时间线，回顾我的创作记录
         </p>
         <div class="mt-4 flex flex-wrap items-center gap-2">
-          <span class="hero-badge">{totalPosts} posts</span>
+          <span class="hero-badge">{totalPosts} 文章</span>
           <span class="hero-badge"
-            >{yearGroups.length}
-            {yearGroups.length === 1 ? "año" : "años"}</span
+            >{yearGroups.length}年</span
           >
         </div>
       </div>

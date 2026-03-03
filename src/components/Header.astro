@@ -73,28 +73,28 @@ const isActive = (path: string) => {
             <a
               href="/posts"
               class:list={["nav-link", { "nav-active": isActive("/posts") }]}
-              >Posts</a
+              >文章</a
             >
           </li>
           <li>
             <a
               href="/tags"
               class:list={["nav-link", { "nav-active": isActive("/tags") }]}
-              >Tags</a
+              >标签</a
             >
           </li>
           <li>
             <a
               href="/about"
               class:list={["nav-link", { "nav-active": isActive("/about") }]}
-              >About</a
+              >关于</a
             >
           </li>
           <li class="flex items-center">
             <a
               href="/search"
               class:list={["nav-link", { "nav-active": isActive("/search") }]}
-              title="Ir a búsqueda">Search</a
+              title="Ir a búsqueda">搜索</a
             >
           </li>
           {
@@ -110,7 +110,7 @@ const isActive = (path: string) => {
                   aria-label="archives"
                 >
                   <IconArchive class="hidden sm:inline-block" />
-                  <span class="sm:sr-only">Archives</span>
+                  <span class="sm:sr-only">存档</span>
                 </LinkButton>
               </li>
             )
@@ -128,7 +128,7 @@ const isActive = (path: string) => {
                   aria-label="galleries"
                 >
                   <IconGallery class="hidden sm:inline-block" />
-                  <span class="sm:sr-only">Galerías</span>
+                  <span class="sm:sr-only">图集</span>
                 </LinkButton>
               </li>
             )
@@ -176,7 +176,7 @@ const isActive = (path: string) => {
   <div id="mobile-menu" class="mobile-menu sm:hidden" aria-hidden="true">
     <!-- Overlay/Backdrop -->
     <div class="mobile-menu-backdrop"></div>
-    
+
     <!-- Floating Glass Panel -->
     <div class="app-layout">
       <div class="mobile-menu-panel relative mt-2 w-full mx-auto rounded-2xl border border-white/10 dark:border-white/5 overflow-hidden shadow-2xl">
@@ -188,7 +188,7 @@ const isActive = (path: string) => {
               style="--i:0"
             >
               <span class="mobile-nav-indicator"></span>
-              <span>Posts</span>
+              <span>文章</span>
             </a>
             <a
               href="/tags"
@@ -196,7 +196,7 @@ const isActive = (path: string) => {
               style="--i:1"
             >
               <span class="mobile-nav-indicator"></span>
-              <span>Tags</span>
+              <span>标签</span>
             </a>
             <a
               href="/about"
@@ -204,7 +204,7 @@ const isActive = (path: string) => {
               style="--i:2"
             >
               <span class="mobile-nav-indicator"></span>
-              <span>About</span>
+              <span>关于</span>
             </a>
             {
               SITE.showArchives && (
@@ -217,7 +217,7 @@ const isActive = (path: string) => {
                   style="--i:3"
                 >
                   <span class="mobile-nav-indicator" />
-                  <span>Archives</span>
+                  <span>存档</span>
                 </a>
               )
             }
@@ -232,7 +232,7 @@ const isActive = (path: string) => {
                   style="--i:4"
                 >
                   <span class="mobile-nav-indicator" />
-                  <span>Galerías</span>
+                  <span>图集</span>
                 </a>
               )
             }
@@ -287,7 +287,7 @@ const isActive = (path: string) => {
   #main-header {
     background: transparent;
   }
-  
+
   :global(.header-scrolled) {
     background: color-mix(in srgb, var(--background) 80%, transparent) !important;
     backdrop-filter: blur(16px) saturate(180%);
@@ -748,7 +748,7 @@ const isActive = (path: string) => {
     const backdrop = document.querySelector(".mobile-menu-backdrop");
 
     if (!menuBtn || !mobileMenu) return;
-    
+
     const closeMenu = () => {
       menuBtn.setAttribute("aria-expanded", "false");
       menuBtn.setAttribute("aria-label", "Open Menu");
@@ -772,7 +772,7 @@ const isActive = (path: string) => {
       },
       { signal }
     );
-    
+
     // Close when clicking the backdrop
     if (backdrop) {
       backdrop.addEventListener("click", closeMenu, { signal });

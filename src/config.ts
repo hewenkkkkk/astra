@@ -1,8 +1,8 @@
 export const SITE = {
   website: "https://devosfera.vercel.app/",
-  author: "芯 笑",
+  author: "芯笑",
   profile: "https://github.com/0xdres",
-  desc: "追求生活和学习的平衡",
+  desc: "你若相逢•便是有缘",
   title: "Welcome",
   ogImage: "devosfera-og.webp", // ubicado en la carpeta public
   lightAndDarkMode: true,

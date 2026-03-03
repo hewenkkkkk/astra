@@ -40,7 +40,7 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
         <p
           class="max-w-xs text-center font-cartograph text-[11px] leading-relaxed tracking-wide text-foreground/40 sm:text-start"
         >
-          Un espacio donde la curiosidad se convierte en código.
+          追求生活和学习的平衡
         </p>
       </div>
 
@@ -78,12 +78,20 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
     <div
       class="mt-4 flex flex-col items-center justify-between gap-2 sm:flex-row"
     >
+      <a
+        class="font-cartograph text-[11px] tracking-wide opacity-30 transition-colors hover:text-accent"
+        href="https://beian.miit.gov.cn/"
+      >
+        蜀ICP备2022029516号-2
+      </a>
+      <a
+        class="font-cartograph text-[11px] tracking-wide opacity-30 transition-colors hover:text-accent"
+        href="https://icp.gov.moe/?keyword=20230527"
+      >
+        萌ICP备20230527号
+      </a>
       <p class="font-cartograph text-[11px] tracking-wide opacity-35">
-        &copy; {currentYear}
-        {SITE.title}. Todos los derechos reservados.
-      </p>
-      <p class="font-cartograph text-[11px] tracking-wide opacity-30">
-        Hecho con <span class="text-accent">&#9829;</span> y mucho café
+        Copyright &copy; 2022-{currentYear} {SITE.author}
       </p>
     </div>
   </div>
