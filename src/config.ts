@@ -23,9 +23,9 @@ export const SITE = {
   lang: "en", // html lang code. Set this empty and default will be "en"
   timezone: "Asia/Shanghai", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   introAudio: {
-    enabled: true, // mostrar/ocultar el reproductor en el hero
-    src: "/audio/intro-web.mp3", // ruta al archivo (relativa a /public)
-    label: "INTRO.MP3", // etiqueta display en el reproductor
-    duration: 30, // duración en segundos (para la barra de progreso fija)
+    enabled: true, // 在首页 Hero 区域显示 / 隐藏播放器
+    src: "/audio/bird.mp3", // 音频文件路径（相对于 /public 目录）
+    label: "Flight of the Inner Bird", // 播放器中显示的标签名称
+    duration: 330, // 音频时长（单位：秒，用于固定进度条显示）
   },
 } as const;

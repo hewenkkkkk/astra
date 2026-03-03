@@ -1,13 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 250" xmlns:bx="https://boxy-svg.com">
   <g transform="matrix(1.112155, 0, 0, 1.112155, 12.50231, -14.050506)" id="object-0">
-    <text class="logo-text-left" style="fill: rgb(51, 51, 51); font-family: var(--font-cascadia-code), 'Cascadia Code', monospace; font-size: 150px; font-weight: 600; white-space: pre;" x="0" y="176.957">Dev</text>
-    <text class="logo-sphere" style="fill: rgb(167, 90, 90); font-family: var(--font-cascadia-code), 'Cascadia Code', monospace; font-size: 150px; font-weight: 600; letter-spacing: -30px; paint-order: stroke; white-space: pre; transform-origin: 342.846px 129.448px;" x="250.711" y="176.957">{·}</text>
-    <text class="logo-text-right" style="fill: rgb(51, 51, 51); font-family: var(--font-cascadia-code), 'Cascadia Code', monospace; font-size: 150px; font-weight: 600; white-space: pre; transform-origin: -123.373px 8.755px;"><tspan x="437.222" y="89.954" style="baseline-shift: sub;">sfera</tspan></text>
+
+    <!-- 主标题：在 transform 后的安全区域居中-->
+    <text
+            style="fill: rgb(53, 53, 56); font-family: var(--font-cascadia-code), 'Cascadia Code', monospace; font-size: 140px; font-weight: 600; white-space: pre;"
+            x="444" y="150"
+            text-anchor="middle"
+            dominant-baseline="middle"
+            textLength="820"
+            lengthAdjust="spacingAndGlyphs"
+    >quiet<tspan style="fill: rgb(167, 90, 90);">·</tspan>code</text>
+
+    <!-- 海浪线：同样以 x≈444 为中心 -->
+    <g transform="translate(444, 205)">
+      <path
+              d="M -410 0
+           C -340 0, -340 -22, -270 -22
+           C -200 -22, -200 0, -130 0
+           C  -60 0,  -60 -16,   10 -16
+           C   80 -16,  80 0,  150 0
+           C  220 0,  220 -22, 290 -22
+           C  360 -22, 360 0,  410 0"
+              fill="none"
+              stroke="rgb(30, 111, 168)"
+              stroke-width="8"
+              stroke-linecap="round"
+              opacity="0.92"
+      />
+
+      <path
+              d="M -270 -22
+           C -200 -22, -200 0, -130 0
+           C  -60 0,  -60 -16,  10 -16
+           C   80 -16, 80 0,  150 0
+           C  220 0,  220 -22, 290 -22"
+              fill="none"
+              stroke="rgba(235, 242, 237, 0.70)"
+              stroke-width="3"
+              stroke-linecap="round"
+              opacity="0.95"
+      />
+    </g>
+
   </g>
+
   <defs>
     <bx:export>
-      <bx:file format="svg" href="#object-0" path="Sin título.svg"/>
+      <bx:file format="svg" href="#object-0" path="logo.svg"/>
     </bx:export>
   </defs>
 </svg>
