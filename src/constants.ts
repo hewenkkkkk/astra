@@ -7,6 +7,7 @@ import IconWhatsapp from "@/assets/icons/IconWhatsapp.svg";
 import IconFacebook from "@/assets/icons/IconFacebook.svg";
 import IconTelegram from "@/assets/icons/IconTelegram.svg";
 import IconPinterest from "@/assets/icons/IconPinterest.svg";
+import iconCSDN from "@/assets/icons/iconCSDN.svg";
 import { SITE } from "@/config";
 
 interface Social {
@@ -20,60 +21,54 @@ export const SOCIALS: Social[] = [
   {
     name: "GitHub",
     href: "https://github.com/hewenkkkkk/",
-    linkTitle: `${SITE.title} en GitHub`,
+    linkTitle: `GitHub`,
     icon: IconGitHub,
   },
   {
-    name: "X",
-    href: "https://x.com/avdyen",
-    linkTitle: `${SITE.title} en X`,
-    icon: IconBrandX,
-  },
-  {
-    name: "LinkedIn",
-    href: "https://www.linkedin.com/in/avdyan/",
-    linkTitle: `${SITE.title} en LinkedIn`,
-    icon: IconLinkedin,
+    name: "CSDN",
+    href: "https://blog.csdn.net/weixin_63802890",
+    linkTitle: `CSDN`,
+    icon: iconCSDN,
   },
   {
     name: "Mail",
     href: "mailto:hewenjun1216@foxmail.com",
-    linkTitle: `Envia un correo a ${SITE.title}`,
+    linkTitle: `mail`,
     icon: IconMail,
   },
 ] as const;
 
 export const SHARE_LINKS: Social[] = [
-  {
-    name: "WhatsApp",
-    href: "https://wa.me/?text=",
-    linkTitle: `Envia este post por WhatsApp`,
-    icon: IconWhatsapp,
-  },
-  {
-    name: "Facebook",
-    href: "https://www.facebook.com/sharer.php?u=",
-    linkTitle: `Comparte este post en Facebook`,
-    icon: IconFacebook,
-  },
-  {
-    name: "X",
-    href: "https://x.com/intent/post?url=",
-    linkTitle: `Comparte este post en X`,
-    icon: IconBrandX,
-  },
-  {
-    name: "Telegram",
-    href: "https://t.me/share/url?url=",
-    linkTitle: `Comparte este post por Telegram`,
-    icon: IconTelegram,
-  },
-  {
-    name: "Pinterest",
-    href: "https://pinterest.com/pin/create/button/?url=",
-    linkTitle: `Comparte este post en Pinterest`,
-    icon: IconPinterest,
-  },
+  // {
+  //   name: "WhatsApp",
+  //   href: "https://wa.me/?text=",
+  //   linkTitle: `Envia este post por WhatsApp`,
+  //   icon: IconWhatsapp,
+  // },
+  // {
+  //   name: "Facebook",
+  //   href: "https://www.facebook.com/sharer.php?u=",
+  //   linkTitle: `Comparte este post en Facebook`,
+  //   icon: IconFacebook,
+  // },
+  // {
+  //   name: "X",
+  //   href: "https://x.com/intent/post?url=",
+  //   linkTitle: `Comparte este post en X`,
+  //   icon: IconBrandX,
+  // },
+  // {
+  //   name: "Telegram",
+  //   href: "https://t.me/share/url?url=",
+  //   linkTitle: `Comparte este post por Telegram`,
+  //   icon: IconTelegram,
+  // },
+  // {
+  //   name: "Pinterest",
+  //   href: "https://pinterest.com/pin/create/button/?url=",
+  //   linkTitle: `Comparte este post en Pinterest`,
+  //   icon: IconPinterest,
+  // },
   {
     name: "Mail",
     href: "mailto:?subject=See%20this%20post&body=",

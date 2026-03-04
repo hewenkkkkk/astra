@@ -1,7 +1,7 @@
 export const SITE = {
   website: "https://devosfera.vercel.app/",
   author: "芯笑",
-  profile: "https://github.com/0xdres",
+  profile: "https://github.com/hewenkkkkk",
   desc: "你若相逢•便是有缘",
   title: "Welcome",
   ogImage: "devosfera-og.webp", // ubicado en la carpeta public
@@ -13,7 +13,7 @@ export const SITE = {
   showGalleries: true,
   showBackButton: true, // show back button in post detail
   editPost: {
-    enabled: true,
+    enabled: false,
     text: "Editar este post",
     url: "https://github.com/0xdres/astro-devosfera/edit/main/",
   },
