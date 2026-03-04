@@ -7,7 +7,8 @@ export const SITE = {
   ogImage: "devosfera-og.webp", // ubicado en la carpeta public
   lightAndDarkMode: true,
   postPerIndex: 6,
-  postPerPage: 8,
+  postPerPage: 9,
+  timePerPage: 9, // 片刻分页
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
   showArchives: true,
   showGalleries: true,
@@ -18,7 +19,7 @@ export const SITE = {
     url: "https://github.com/0xdres/astro-devosfera/edit/main/",
   },
   dynamicOgImage: true,
-  authorImage: "src/assets/images/author.webp",
+  authorImage: "https://picui.ogmua.cn/s1/2026/03/04/69a8431b03cc1.webp",
   dir: "ltr", // "rtl" | "auto"
   lang: "en", // html lang code. Set this empty and default will be "en"
   timezone: "Asia/Shanghai", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones

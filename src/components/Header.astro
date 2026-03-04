@@ -90,6 +90,13 @@ const isActive = (path: string) => {
               >关于</a
             >
           </li>
+          <li>
+            <a
+              href="/time"
+              class:list={["nav-link", { "nav-active": isActive("/time") }]}
+              >片刻</a
+            >
+          </li>
           <li class="flex items-center">
             <a
               href="/search"
@@ -206,6 +213,14 @@ const isActive = (path: string) => {
               <span class="mobile-nav-indicator"></span>
               <span>关于</span>
             </a>
+            <a
+              href="/time"
+              class:list={["mobile-nav-link", { active: isActive("/time") }]}
+              style="--i:3"
+            >
+              <span class="mobile-nav-indicator"></span>
+              <span>片刻</span>
+            </a>
             {
               SITE.showArchives && (
                 <a
@@ -214,7 +229,7 @@ const isActive = (path: string) => {
                     "mobile-nav-link",
                     { active: isActive("/archives") },
                   ]}
-                  style="--i:3"
+                  style="--i:4"
                 >
                   <span class="mobile-nav-indicator" />
                   <span>存档</span>
@@ -229,7 +244,7 @@ const isActive = (path: string) => {
                     "mobile-nav-link",
                     { active: isActive("/galleries") },
                   ]}
-                  style="--i:4"
+                  style="--i:5"
                 >
                   <span class="mobile-nav-indicator" />
                   <span>图集</span>
