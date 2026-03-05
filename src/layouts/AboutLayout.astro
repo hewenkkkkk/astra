@@ -1,17 +1,22 @@
 ---
-import type { MarkdownLayoutProps } from "astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import Layout from "./Layout.astro";
 import { SITE } from "@/config";
 
-type Props = MarkdownLayoutProps<{ title: string }>;
+type Props = {
+  title?: string;
+  description?: string;
+};
 
-const { frontmatter } = Astro.props;
+const {
+  title = "About",
+  description = "关于我与我的世界。",
+} = Astro.props;
 ---
 
-<Layout title={`${frontmatter.title} | ${SITE.title}`}>
+<Layout title={`${title} | ${SITE.title}`} description={description}>
   <Header />
   <Breadcrumb />
   <main id="main-content" class="app-layout">
@@ -40,17 +45,90 @@ const { frontmatter } = Astro.props;
         </h1>
         <div class="hero-badges">
           <span class="badge" data-badge>🚀 Developer</span>
-          <span class="badge" data-badge>📚 Estudiante</span>
+          <span class="badge" data-badge>📚 Worker</span>
           <span class="badge" data-badge>🎮 Gamer</span>
         </div>
       </div>
     </div>
 
-    <section
-      id="about"
-      class="about-content app-prose mb-28 max-w-app prose-img:border-0"
-    >
-      <slot />
+    <section id="about-world" class="about-world">
+      <div class="world-header">
+        <p class="world-kicker">游戏</p>
+        <h2 class="world-title">Minecraft</h2>
+      </div>
+
+      <div class="world-showcase">
+        <div class="world-hero-card">
+          <div class="world-image-stack">
+            <img
+              class="world-image world-image--day"
+              src="/images/minecraft-landscape.svg"
+              alt="Minecraft inspired landscape"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              class="world-image world-image--night"
+              src="/images/minecraft-landscape-night.svg"
+              alt="Minecraft inspired night landscape"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="world-overlay">
+            <span class="world-label">Minecraft Vibes</span>
+            <span class="world-coords">x: 128 / y: 64 / z: -24</span>
+          </div>
+          <div class="world-pixels" aria-hidden="true">
+            <span class="pixel pixel-1"></span>
+            <span class="pixel pixel-2"></span>
+            <span class="pixel pixel-3"></span>
+            <span class="pixel pixel-4"></span>
+            <span class="pixel pixel-5"></span>
+          </div>
+        </div>
+        <div class="world-legend">
+          <h3>在方块里建造与探索</h3>
+          <p>
+            喜欢在 Minecraft 里慢慢搭建基地，探索地形，记录那些只有
+            方块世界才有的安静时刻。
+          </p>
+          <div class="world-legend-tags">
+            <span>生存</span>
+            <span>建筑</span>
+            <span>探险</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="music-showcase">
+        <div class="music-text">
+          <p class="music-kicker">音乐</p>
+          <h3 class="music-title">我的音乐偏好</h3>
+          <p class="music-subtitle">
+            喜欢在写代码或放空时听民谣和流行，让节奏把心情慢慢拉平。
+          </p>
+          <div class="music-tags">
+            <span>民谣</span>
+            <span>流行</span>
+          </div>
+        </div>
+        <div class="music-art" aria-hidden="true">
+          <img
+            src="/images/music-wave.svg"
+            alt="Music illustration"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="music-notes" aria-hidden="true">
+            <span class="music-note note-1"></span>
+            <span class="music-note note-2"></span>
+            <span class="music-note note-3"></span>
+            <span class="music-note note-4"></span>
+          </div>
+        </div>
+      </div>
+
     </section>
   </main>
   <Footer />
@@ -112,6 +190,7 @@ const { frontmatter } = Astro.props;
         { signal }
       );
     });
+
   });
 </script>
 
@@ -408,25 +487,370 @@ const { frontmatter } = Astro.props;
     opacity: 1;
   }
 
-  /* Content styling */
-  .about-content {
+  /* My world section */
+  .about-world {
+    margin-bottom: 4rem;
+  }
+
+  .world-header {
+    margin-bottom: 1.75rem;
+  }
+
+  .world-kicker {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: color-mix(in srgb, var(--color-foreground) 55%, transparent);
+  }
+
+  .world-title {
+    margin-top: 0.4rem;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .world-subtitle {
+    margin-top: 0.5rem;
+    max-width: 36rem;
+    color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+  }
+
+  .world-showcase {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    align-items: center;
+  }
+
+  .world-hero-card {
+    position: relative;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--color-border) 25%, transparent);
+    background: color-mix(in srgb, var(--color-foreground) 4%, transparent);
+    box-shadow:
+      0 18px 35px -30px color-mix(in srgb, var(--color-accent) 35%, transparent),
+      inset 0 1px 0 color-mix(in srgb, var(--color-accent) 10%, transparent);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .world-hero-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 24px 40px -30px color-mix(in srgb, var(--color-accent) 45%, transparent),
+      inset 0 1px 0 color-mix(in srgb, var(--color-accent) 15%, transparent);
+  }
+
+  .world-image-stack {
     position: relative;
   }
 
-  .about-content :global(h2) {
-    position: relative;
-    display: inline-block;
+  .world-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.4s ease;
   }
 
-  .about-content :global(h2::after) {
+  .world-image--night {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+  }
+
+  html[data-theme="dark"] .world-image--day {
+    opacity: 0;
+  }
+
+  html[data-theme="dark"] .world-image--night {
+    opacity: 1;
+  }
+
+  .world-overlay {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--color-background) 70%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-border) 30%, transparent);
+    backdrop-filter: blur(6px);
+  }
+
+  .world-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .world-coords {
+    font-size: 0.75rem;
+    color: color-mix(in srgb, var(--color-foreground) 65%, transparent);
+  }
+
+  .world-pixels {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .pixel {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--color-accent) 35%, transparent);
+    animation: pixel-float 5s ease-in-out infinite;
+  }
+
+  .pixel-1 {
+    top: 18%;
+    left: 12%;
+    animation-delay: 0s;
+  }
+
+  .pixel-2 {
+    top: 30%;
+    right: 16%;
+    animation-delay: 1s;
+  }
+
+  .pixel-3 {
+    bottom: 24%;
+    left: 22%;
+    animation-delay: 2s;
+  }
+
+  .pixel-4 {
+    bottom: 18%;
+    right: 28%;
+    animation-delay: 3s;
+  }
+
+  .pixel-5 {
+    top: 12%;
+    right: 36%;
+    animation-delay: 4s;
+  }
+
+  @keyframes pixel-float {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translateY(-10px);
+      opacity: 1;
+    }
+  }
+
+  .world-legend h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .world-legend p {
+    color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+  }
+
+  .world-legend-tags {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .world-legend-tags span {
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    border: 1px solid color-mix(in srgb, var(--color-border) 25%, transparent);
+    background: color-mix(in srgb, var(--color-foreground) 4%, transparent);
+  }
+
+  .music-showcase {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .music-kicker {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: color-mix(in srgb, var(--color-foreground) 55%, transparent);
+  }
+
+  .music-title {
+    margin-top: 0.4rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .music-subtitle {
+    margin-top: 0.6rem;
+    color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+  }
+
+  .music-tags {
+    margin-top: 0.9rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .music-tags span {
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    border: 1px solid color-mix(in srgb, var(--color-border) 25%, transparent);
+    background: color-mix(in srgb, var(--color-background) 92%, transparent);
+    color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+  }
+
+  .music-art {
+    position: relative;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--color-border) 20%, transparent);
+    background:
+      radial-gradient(
+        circle at 30% 25%,
+        color-mix(in srgb, var(--color-accent) 20%, transparent),
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at 85% 15%,
+        color-mix(in srgb, var(--color-accent) 15%, transparent),
+        transparent 45%
+      ),
+      repeating-linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--color-foreground) 6%, transparent),
+        color-mix(in srgb, var(--color-foreground) 6%, transparent) 10px,
+        transparent 10px,
+        transparent 20px
+      ),
+      linear-gradient(135deg, #e8f2ff, #c6d9ff);
+    box-shadow:
+      0 20px 35px -30px color-mix(in srgb, var(--color-accent) 35%, transparent),
+      inset 0 1px 0 color-mix(in srgb, var(--color-accent) 10%, transparent);
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+
+  .music-art img {
+    width: min(86%, 320px);
+    height: auto;
+    display: block;
+  }
+
+  .music-notes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .music-note {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    opacity: 0.8;
+    animation: note-float 4.5s ease-in-out infinite;
+  }
+
+  .music-note::before {
     content: "";
     position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--color-accent), transparent);
+    width: 12px;
+    height: 9px;
     border-radius: 999px;
-    box-shadow: 0 0 8px color-mix(in srgb, var(--color-accent) 30%, transparent);
+    background: color-mix(in srgb, var(--color-accent) 65%, transparent);
+    bottom: 0;
+    left: 0;
   }
+
+  .music-note::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 16px;
+    background: color-mix(in srgb, var(--color-accent) 70%, transparent);
+    left: 9px;
+    bottom: 6px;
+    border-radius: 2px;
+  }
+
+  .note-1 {
+    top: 18%;
+    left: 12%;
+    animation-delay: 0s;
+  }
+
+  .note-2 {
+    top: 30%;
+    right: 16%;
+    animation-delay: 1s;
+  }
+
+  .note-3 {
+    bottom: 28%;
+    left: 22%;
+    animation-delay: 2s;
+  }
+
+  .note-4 {
+    bottom: 18%;
+    right: 24%;
+    animation-delay: 3s;
+  }
+
+  @keyframes note-float {
+    0%,
+    100% {
+      transform: translateY(0) scale(1);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translateY(-12px) scale(1.05);
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .world-showcase {
+      grid-template-columns: 1fr;
+    }
+
+    .music-showcase {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .world-hero-card,
+    .pixel {
+      animation: none;
+      transition: none;
+    }
+
+    .music-art img {
+      animation: none;
+    }
+
+    .music-note {
+      animation: none;
+    }
+  }
+
 </style>
