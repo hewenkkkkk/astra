@@ -124,8 +124,17 @@ const totalPosts = page.total;
     }
 
     // Initialize Pagefind local search
-    const container = document.querySelector("#posts-pagefind");
-    if (!container || container.childElementCount > 0) return;
+    const container = document.querySelector("#posts-pagefind") as HTMLElement | null;
+    if (!container) return;
+
+    if (container.dataset.pagefindInitialized === "true") return;
+
+    if (container.childElementCount > 0) {
+      container.dataset.pagefindInitialized = "true";
+      return;
+    }
+
+    container.dataset.pagefindInitialized = "true";
 
     const onIdle = window.requestIdleCallback || (cb => setTimeout(cb, 1));
     onIdle(async () => {
