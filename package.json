@@ -19,6 +19,7 @@
     "@astrojs/vercel": "^9.0.4",
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.1.18",
+    "@vercel/analytics": "^1.6.1",
     "astro": "^5.17.2",
     "dayjs": "^1.11.19",
     "lodash.kebabcase": "^4.1.1",
