@@ -3,7 +3,7 @@ export const SITE = {
   author: "芯笑",
   profile: "https://github.com/hewenkkkkk",
   desc: "Fake it till you make it……",
-  title: "Welcome",
+  title: "芯笑",
   ogImage: "devosfera-og.webp", // ubicado en la carpeta public
   lightAndDarkMode: true,
   postPerIndex: 6,
