@@ -13,9 +13,12 @@ import {
 import { transformerFileName } from "./src/utils/transformers/fileName";
 import { SITE } from "./src/config";
 
+import vercel from "@astrojs/vercel";
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
+
   integrations: [
     mdx({
       extendMarkdownConfig: true,
@@ -24,6 +27,7 @@ export default defineConfig({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
     }),
   ],
+
   markdown: {
     remarkPlugins: [
       remarkBilibili,
@@ -43,6 +47,7 @@ export default defineConfig({
       ],
     },
   },
+
   vite: {
     // eslint-disable-next-line
     // @ts-ignore
@@ -53,10 +58,12 @@ export default defineConfig({
       exclude: ["@resvg/resvg-js"],
     },
   },
+
   image: {
     responsiveStyles: true,
     layout: "constrained",
   },
+
   env: {
     schema: {
       PUBLIC_GOOGLE_SITE_VERIFICATION: envField.string({
@@ -66,6 +73,7 @@ export default defineConfig({
       }),
     },
   },
+
   experimental: {
     preserveScriptOrder: true,
     fonts: [
@@ -123,4 +131,6 @@ export default defineConfig({
       },
     ],
   },
+
+  adapter: vercel(),
 });
