@@ -70,7 +70,7 @@ const renderedMoments = await Promise.all(
 );
 ---
 
-<Layout title={`片刻 | ${SITE.title}`} description="记录生活的片刻心情与想法。">
+<Layout title={`Time | ${SITE.title}`} description="记录生活的片刻心情与想法。">
   <Header />
   <Breadcrumb />
   <main id="main-content" class="app-layout pb-16">
@@ -131,15 +131,21 @@ const renderedMoments = await Promise.all(
                 </div>
               </header>
               <div class="moment-body">
-                {title && <h2 class="moment-title">{title}</h2>}
                 {
-                  tags.length ? (
-                    <div class="moment-tags">
-                      {tags.map(item => (
-                        <span class="moment-tag">{item}</span>
-                      ))}
+                  (title || tags.length) && (
+                    <div class="moment-title-row">
+                      {title && <h2 class="moment-title">{title}</h2>}
+                      {
+                        tags.length ? (
+                          <div class="moment-tags">
+                            {tags.map(item => (
+                              <span class="moment-tag">{item}</span>
+                            ))}
+                          </div>
+                        ) : null
+                      }
                     </div>
-                  ) : null
+                  )
                 }
                 <div class="moment-content app-prose">
                   <Content />
@@ -274,10 +280,17 @@ const renderedMoments = await Promise.all(
     gap: 0.45rem;
   }
 
+  .moment-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.6rem;
+  }
+
   .moment-title {
     font-size: 1rem;
     font-weight: 600;
-    margin-top: 0.1rem;
+    margin: 0;
   }
 
   .moment-meta {

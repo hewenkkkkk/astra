@@ -129,6 +129,29 @@ const {
         </div>
       </div>
 
+      <div class="drama-showcase">
+        <div class="drama-art" aria-hidden="true">
+          <img
+            src="/images/doctor-who.svg"
+            alt="Doctor Who inspired illustration"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="drama-text">
+          <p class="drama-kicker">剧集</p>
+          <h3 class="drama-title">我喜欢的剧</h3>
+          <p class="drama-subtitle">
+            《神秘博士》是我最爱的科幻剧集，时间旅行和未知宇宙都很迷人。
+          </p>
+          <div class="drama-tags">
+            <span>科幻</span>
+            <span>时间旅行</span>
+            <span>冒险</span>
+          </div>
+        </div>
+      </div>
+
     </section>
   </main>
   <Footer />
@@ -827,6 +850,65 @@ const {
     }
   }
 
+  .drama-showcase {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .drama-kicker {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: color-mix(in srgb, var(--color-foreground) 55%, transparent);
+  }
+
+  .drama-title {
+    margin-top: 0.4rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .drama-subtitle {
+    margin-top: 0.6rem;
+    color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+  }
+
+  .drama-tags {
+    margin-top: 0.9rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .drama-tags span {
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    border: 1px solid color-mix(in srgb, var(--color-border) 25%, transparent);
+    background: color-mix(in srgb, var(--color-foreground) 6%, transparent);
+    color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+  }
+
+  .drama-art {
+    position: relative;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--color-border) 25%, transparent);
+    background: color-mix(in srgb, var(--color-foreground) 4%, transparent);
+    box-shadow:
+      0 18px 32px -28px color-mix(in srgb, var(--color-accent) 30%, transparent),
+      inset 0 1px 0 color-mix(in srgb, var(--color-accent) 8%, transparent);
+  }
+
+  .drama-art img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
   @media (max-width: 900px) {
     .world-showcase {
       grid-template-columns: 1fr;
@@ -834,6 +916,20 @@ const {
 
     .music-showcase {
       grid-template-columns: 1fr;
+    }
+
+    .drama-showcase {
+      grid-template-columns: 1fr;
+    }
+
+    .music-art,
+    .drama-art {
+      order: -1;
+    }
+
+    .music-text,
+    .drama-text {
+      order: 1;
     }
   }
 
