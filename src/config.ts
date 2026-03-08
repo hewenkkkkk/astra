@@ -2,7 +2,7 @@ export const SITE = {
   website: "https://lamper.top/",
   author: "芯笑",
   profile: "https://github.com/hewenkkkkk",
-  desc: "你若相逢 • 便是有缘",
+  desc: "Fake it till you make it……",
   title: "Welcome",
   ogImage: "devosfera-og.webp", // ubicado en la carpeta public
   lightAndDarkMode: true,

@@ -10,7 +10,7 @@
             dominant-baseline="middle"
             textLength="820"
             lengthAdjust="spacingAndGlyphs"
-    >quiet<tspan style="fill: rgb(167, 90, 90);">·</tspan>code</text>
+    >astra<tspan style="fill: rgb(167, 90, 90);">·</tspan>quiet</text>
 
     <!-- 海浪线：同样以 x≈444 为中心 -->
     <g transform="translate(444, 205)">
