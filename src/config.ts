@@ -1,8 +1,8 @@
 export const SITE = {
-  website: "https://devosfera.vercel.app/",
+  website: "https://lamper.top/",
   author: "芯笑",
   profile: "https://github.com/hewenkkkkk",
-  desc: "你若相逢•便是有缘",
+  desc: "你若相逢 • 便是有缘",
   title: "Welcome",
   ogImage: "devosfera-og.webp", // ubicado en la carpeta public
   lightAndDarkMode: true,
