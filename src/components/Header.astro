@@ -727,25 +727,15 @@ const isActive = (path: string) => {
     const { signal } = scrollCleanup;
 
     const header = document.getElementById("main-header");
-    const navWrap = document.getElementById("top-nav-wrap");
     const borderLine = document.getElementById("header-border");
 
-    if (!header || !navWrap || !borderLine) return;
+    if (!header || !borderLine) return;
 
     const handleScroll = () => {
-      if (window.scrollY > 15) {
-        header.classList.add("header-scrolled");
-        navWrap.classList.remove("sm:py-5");
-        navWrap.classList.add("sm:py-3");
-        borderLine.classList.remove("opacity-0");
-        borderLine.classList.add("opacity-100");
-      } else {
-        header.classList.remove("header-scrolled");
-        navWrap.classList.add("sm:py-5");
-        navWrap.classList.remove("sm:py-3");
-        borderLine.classList.add("opacity-0");
-        borderLine.classList.remove("opacity-100");
-      }
+      const scrolled = window.scrollY > 15;
+      header.classList.toggle("header-scrolled", scrolled);
+      borderLine.classList.toggle("opacity-0", !scrolled);
+      borderLine.classList.toggle("opacity-100", scrolled);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true, signal });
