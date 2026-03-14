@@ -8,7 +8,7 @@
 
 - 新增页面：`/time` 片刻（短内容流、分页、标签筛选、九宫格图片、B 站嵌入）
 - 重新设计页面：`/about`（保留 aurora hero，加入 Minecraft、音乐、剧集模块）
-
+- 新增`EntryEmbed`组件，支持在博客页面插入其它博客文章或者片刻内容并跳转
 ---
 
 ## 目录
@@ -22,6 +22,7 @@
    - [片刻](#moments)
    - [图片画廊](#galleries)
 6. [GalleryEmbed 组件](#gallery-embed)
+7. [EntryEmbed 组件](#entry-embed)
 8. [关键组件](#key-components)
 10. [许可证](#license)
 
@@ -232,6 +233,35 @@ IMG_4532.JPG            -> 画廊标题（兜底）
 | `cols`     | `2 \| 3 \| 4` | `3`    | 网格列数                               |
 
 每个 `<GalleryEmbed>` 都会创建独立的 lightbox `<dialog id="ge-lb-{slug}">`，支持 **同一篇文章多次嵌入**，互不冲突。无效 slug 会渲染警告块，不影响构建。
+
+---
+
+<a id="entry-embed"></a>
+## EntryEmbed 组件
+
+在任意 `.mdx` 中引用博客或片刻内容的小卡片，点击 **新开页** 跳转到对应文章或片刻位置。
+
+```mdx
+{/* 引用博客（默认 type=blog） */}
+<EntryEmbed slug="ai-code-think" />
+
+{/* 引用片刻 */}
+<EntryEmbed type="time" slug="like" />
+
+{/* 支持子目录与自定义标签显示 */}
+<EntryEmbed type="blog" slug="notes/my-post" showTags={false} />
+```
+
+| 属性       | 类型               | 默认值  | 说明 |
+| :--------- | :----------------- | :------ | :--- |
+| `type`     | `blog \| time`     | `blog`  | 选择引用博客或片刻 |
+| `slug`     | `string`           | -       | **必填**，文件名或相对路径，支持 `.md/.mdx` 省略 |
+| `showTags` | `boolean`          | `true`  | 是否显示标签 chips |
+
+说明：
+- `slug` 需对应 `src/data/blog/` 或 `src/data/time/` 下的文件（支持子目录）
+- 片刻会跳转到 `/time` 对应分页并定位到锚点
+- 若片刻为草稿或未出现在时间流中，会渲染提示块
 
 ---
 

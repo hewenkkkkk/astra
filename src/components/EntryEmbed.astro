@@ -1,0 +1,278 @@
+---
+/**
+  * EntryEmbed - 在 MDX 中用于嵌入博客文章或时间记录的内联卡片组件。
+  *
+  * 使用方式：
+  *   <EntryEmbed type="blog" slug="post-file-name" />
+  *   <EntryEmbed type="time" slug="time-file-name" />
+  *
+  * 参数（Props）：
+  *   type      "blog" | "time"（默认值："blog"）
+  *   slug      文件名或相对于集合根目录的路径（必填）
+  *   showTags  是否显示标签（tag）标签块（默认：true）
+  */
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import { SITE } from "@/config";
+import Datetime from "@/components/Datetime.astro";
+import { getPath } from "@/utils/getPath";
+import { getMomentAnchor } from "@/utils/getMomentAnchor";
+
+type Props = {
+  type?: "blog" | "time";
+  slug: string;
+  showTags?: boolean;
+};
+
+const { type = "blog", slug, showTags = true } = Astro.props;
+const isTime = type === "time";
+
+const normalizeId = (value: string) =>
+  value
+    .replace(/\\/g, "/")
+    .replace(/\/index\.(md|mdx)$/i, "")
+    .replace(/\.(md|mdx)$/i, "")
+    .trim();
+
+const normalizedSlug = normalizeId(slug ?? "");
+
+const entries = (await getCollection(
+  isTime ? "time" : "blog"
+)) as CollectionEntry<"blog">[] | CollectionEntry<"time">[];
+
+const entry = entries.find(item => normalizeId(item.id) === normalizedSlug) as
+  | CollectionEntry<"blog">
+  | CollectionEntry<"time">
+  | undefined;
+
+const stripMarkdown = (input: string) =>
+  input
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/`[^`]*`/g, "")
+    .replace(/!\[[^\]]*\]\([^)]+\)/g, "")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/<\/?[^>]+>/g, "")
+    .replace(/[#>*_~\-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const getExcerpt = (input: string, limit = 140) => {
+  const clean = stripMarkdown(input);
+  if (!clean) return "";
+  if (clean.length <= limit) return clean;
+  return `${clean.slice(0, limit - 3)}...`;
+};
+
+let href: string | null = null;
+let label = isTime ? "Time" : "Blog";
+let title = "";
+let description = "";
+let tags: string[] = [];
+let pubDatetime: Date | undefined;
+let missingFromFeed = false;
+
+if (entry) {
+  if (isTime) {
+    const momentEntry = entry as CollectionEntry<"time">;
+    title = momentEntry.data.title?.trim() || "Untitled time entry";
+    description = getExcerpt(momentEntry.body ?? "") || "No preview available.";
+    tags = (momentEntry.data.tags ?? []).map(item => item.trim()).filter(Boolean);
+    pubDatetime = momentEntry.data.pubDatetime;
+
+    const anchor = getMomentAnchor(momentEntry.id);
+    const allMoments = entries as CollectionEntry<"time">[];
+    const sortedMoments = allMoments
+      .filter(moment => !moment.data.draft)
+      .sort(
+        (a, b) =>
+          b.data.pubDatetime.valueOf() - a.data.pubDatetime.valueOf()
+      );
+    const publishedIndex = sortedMoments.findIndex(
+      moment => moment.id === momentEntry.id
+    );
+
+    if (publishedIndex < 0) {
+      missingFromFeed = true;
+    } else {
+      const page = Math.floor(publishedIndex / SITE.postPerPage) + 1;
+      const base = page === 1 ? "/time" : `/time/${page}`;
+      href = `${base}#${anchor}`;
+    }
+  } else {
+    const blogEntry = entry as CollectionEntry<"blog">;
+    title = blogEntry.data.title;
+    description = blogEntry.data.description;
+    tags = blogEntry.data.tags ?? [];
+    pubDatetime = blogEntry.data.pubDatetime;
+    href = getPath(blogEntry.id, blogEntry.filePath);
+  }
+}
+---
+
+{
+  !entry ? (
+    <div class="entry-embed-error">
+      Entry <code>{slug}</code> not found. Check the file name.
+    </div>
+  ) : missingFromFeed ? (
+    <div class="entry-embed-error">
+      Time entry <code>{slug}</code> is not published in the time feed.
+    </div>
+  ) : (
+    <a
+      class:list={["entry-embed not-prose", `entry-embed-${type}`]}
+      href={href ?? "#"}
+      aria-label={`${label}: ${title}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div class="entry-embed-header">
+        <span class="entry-embed-kind">{label}</span>
+        <span class="entry-embed-title">{title}</span>
+        <span class="entry-embed-arrow" aria-hidden="true">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="7" y1="17" x2="17" y2="7" />
+            <polyline points="7 7 17 7 17 17" />
+          </svg>
+        </span>
+      </div>
+      <div class="entry-embed-meta">
+        {pubDatetime && (
+          <Datetime
+            pubDatetime={pubDatetime}
+            class="entry-embed-date [&>svg]:hidden"
+            size="sm"
+          />
+        )}
+        {showTags && tags.length > 0 && (
+          <div class="entry-embed-tags" aria-hidden="true">
+            {tags.slice(0, 3).map(tag => (
+              <span class="entry-embed-tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+      <p class="entry-embed-desc">{description}</p>
+    </a>
+  )
+}
+
+<style>
+  .entry-embed {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-block: 1.5rem;
+    padding: 0.85rem 1rem;
+    border-radius: 0.9rem;
+    border: 1px solid color-mix(in srgb, var(--border) 35%, transparent);
+    background: color-mix(in srgb, var(--foreground) 2%, transparent);
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .entry-embed:hover {
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    box-shadow: 0 12px 30px -18px color-mix(in srgb, var(--accent) 35%, transparent);
+    transform: translateY(-1px);
+  }
+
+  .entry-embed:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+    outline-offset: 2px;
+  }
+
+  .entry-embed-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .entry-embed-kind {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border-radius: 999px;
+    padding: 0.2rem 0.45rem;
+    flex-shrink: 0;
+  }
+
+  .entry-embed-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--foreground);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .entry-embed-arrow {
+    margin-left: auto;
+    color: color-mix(in srgb, var(--foreground) 55%, transparent);
+    transition: transform 0.2s ease, color 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .entry-embed:hover .entry-embed-arrow {
+    transform: translate(2px, -2px);
+    color: var(--accent);
+  }
+
+  .entry-embed-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: color-mix(in srgb, var(--foreground) 55%, transparent);
+  }
+
+  .entry-embed-date {
+    opacity: 0.7;
+  }
+
+  .entry-embed-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .entry-embed-tag {
+    font-size: 0.65rem;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--accent);
+  }
+
+  .entry-embed-desc {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: color-mix(in srgb, var(--foreground) 70%, transparent);
+    margin: 0;
+  }
+
+  .entry-embed-error {
+    margin-block: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid color-mix(in srgb, orange 40%, transparent);
+    background: color-mix(in srgb, orange 8%, transparent);
+    font-size: 0.875rem;
+  }
+</style>

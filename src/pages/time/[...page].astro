@@ -7,6 +7,7 @@ import Footer from "@/components/Footer.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import Pagination from "@/components/Pagination.astro";
 import { SITE } from "@/config";
+import { getMomentAnchor } from "@/utils/getMomentAnchor";
 
 const extractMomentImages = (body: string) => {
   const images: { src: string; alt: string }[] = [];
@@ -38,7 +39,7 @@ const extractBilibiliIds = (body: string) => {
 };
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const moments = await getCollection("moments", ({ data }) => !data.draft);
+  const moments = await getCollection("time", ({ data }) => !data.draft);
   const sortedMoments = moments.sort(
     (a, b) => b.data.pubDatetime.valueOf() - a.data.pubDatetime.valueOf()
   );
@@ -65,7 +66,8 @@ const renderedMoments = await Promise.all(
     const tags = (moment.data.tags ?? [])
       .map(item => item.trim())
       .filter(Boolean);
-    return { moment, Content, images, title, tags, bilibiliIds };
+    const anchor = getMomentAnchor(moment.id);
+    return { moment, Content, images, title, tags, bilibiliIds, anchor };
   })
 );
 ---
@@ -98,8 +100,9 @@ const renderedMoments = await Promise.all(
       {
         renderedMoments.length ? (
           renderedMoments.map(
-            ({ moment, Content, images, title, tags, bilibiliIds }) => (
+            ({ moment, Content, images, title, tags, bilibiliIds, anchor }) => (
             <article
+              id={anchor}
               class:list={["moment-card", { "has-grid": images.length }]}
               data-moment-card
               data-tags={tags.join(",")}
@@ -258,6 +261,7 @@ const renderedMoments = await Promise.all(
     padding: 1.25rem 0;
     border-bottom: 1px solid
       color-mix(in srgb, var(--color-border) 20%, transparent);
+    scroll-margin-top: 6rem;
   }
 
   .moment-header {

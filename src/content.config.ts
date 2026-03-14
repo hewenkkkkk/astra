@@ -38,7 +38,7 @@ const galleries = defineCollection({
     }),
 });
 
-const moments = defineCollection({
+const time = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: `./${TIME_PATH}` }),
   schema: z.object({
     title: z.string().optional().default(""),
@@ -49,4 +49,4 @@ const moments = defineCollection({
   }),
 });
 
-export const collections = { blog, galleries, moments };
+export const collections = { blog, galleries, time };
