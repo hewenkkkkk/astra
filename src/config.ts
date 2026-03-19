@@ -19,7 +19,7 @@ export const SITE = {
     url: "https://github.com/0xdres/astro-devosfera/edit/main/",
   },
   dynamicOgImage: true,
-  authorImage: "https://picui.ogmua.cn/s1/2026/03/04/69a8431b03cc1.webp",
+  authorImage: "https://pic.lamper.top/wp/2026/a.jpg",
   dir: "ltr", // "rtl" | "auto"
   lang: "en", // html lang code. Set this empty and default will be "en"
   timezone: "Asia/Shanghai", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
