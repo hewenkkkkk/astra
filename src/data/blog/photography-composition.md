@@ -38,8 +38,8 @@ draft: false
 
 常见的引导线有道路、桥梁、墙壁、栅栏、河流……有明确边缘的东西
 
-![](https://i1.wp.com/pic.lamper.top/wp/2023/09/01d9635c1090d4a80121ab5db53b45-685x1024.jpg?ssl=1)
-![](https://i2.wp.com/pic.lamper.top/wp/2023/09/v2-3e2b87ed9dc3513073c5486545b26602_r.jpg?ssl=1)
+![](https://pic.lamper.top/wp/2023/09/01d9635c1090d4a80121ab5db53b45-685x1024.jpg)
+![](https://pic.lamper.top/wp/2023/09/v2-3e2b87ed9dc3513073c5486545b26602_r.jpg)
 
 ## 对角线构图
 
