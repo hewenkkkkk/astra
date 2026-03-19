@@ -27,8 +27,8 @@ draft: false
 
 框架可以是前景也可以是背景，背景作为框架是也可以起到突出中心的作用。
 
-![](https://i0.wp.com/pic.lamper.top/wp/2023/09/Snipaste_2023-09-18_07-58-07.jpg?ssl=1)
-![](https://i0.wp.com/pic.lamper.top/wp/2023/09/Snipaste_2023-09-18_07-55-52.jpg?ssl=1)
+![](https://pic.lamper.top/wp/2023/09/Snipaste_2023-09-18_07-58-07.jpg?ssl=1)
+![](https://pic.lamper.top/wp/2023/09/Snipaste_2023-09-18_07-55-52.jpg?ssl=1)
 
 ## 引导线构图
 
